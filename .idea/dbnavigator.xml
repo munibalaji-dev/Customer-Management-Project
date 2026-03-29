@@ -11,10 +11,10 @@
   </component>
   <component name="DBNavigator.Project.DatabaseAssistantManager">
     <assistants>
-      <assistant-state connection-id="0b51ca21-46d0-4167-855b-37d379b1e694" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="AVAILABLE" acknowledgement="NONE" selected="true">
+      <assistant-state connection-id="0b51ca21-46d0-4167-855b-37d379b1e694" assistant-type="SELECT_AI" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE">
         <tools />
       </assistant-state>
-      <assistant-state connection-id="0b51ca21-46d0-4167-855b-37d379b1e694" assistant-type="SELECT_AI" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE">
+      <assistant-state connection-id="0b51ca21-46d0-4167-855b-37d379b1e694" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="AVAILABLE" acknowledgement="NONE" selected="true">
         <tools />
       </assistant-state>
     </assistants>
@@ -37,7 +37,9 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="0b51ca21-46d0-4167-855b-37d379b1e694" object-ref="schemas/customermanagement/tables/customers" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabasePrerequisiteManager">
     <prerequisites />
@@ -46,7 +48,7 @@
     <connection id="0b51ca21-46d0-4167-855b-37d379b1e694" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="0b51ca21-46d0-4167-855b-37d379b1e694" dataset="customermanagement.customers" active-filter-id="57530ed2-b509-49d7-aefc-79823cd6a569">
+    <filter-actions connection-id="0b51ca21-46d0-4167-855b-37d379b1e694" dataset="customermanagement.customers" active-filter-id="EMPTY_FILTER">
       <filter id="57530ed2-b509-49d7-aefc-79823cd6a569" name="50" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="id" operator="=" value="50" active="true" />
       </filter>

@@ -1,19 +1,23 @@
 package com.munibalaji.CustomerManagementProject.dtos;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
+import java.time.LocalDateTime;
+
 @Getter
-@Setter
 public class ExceptionDto {
 
-    private HttpStatus httpStatus;
-    private String message;
+    private final int status;
+    private final String error;
+    private final String message;
+    private LocalDateTime timestamp;
 
     public ExceptionDto(HttpStatus httpStatus, String message){
 
-        this.httpStatus = httpStatus;
+        this.status = httpStatus.value();
+        this.error = httpStatus.getReasonPhrase();
         this.message = message;
+        this.timestamp = LocalDateTime.now();
     }
 }

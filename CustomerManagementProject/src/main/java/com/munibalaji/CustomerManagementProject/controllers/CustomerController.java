@@ -35,7 +35,7 @@ public class CustomerController {
 
 
 
-    @Operation(summary = "To retrive the customer using their id")
+    @Operation(summary = "To get the customer using their id")
     @GetMapping("/{id}")
     public ResponseEntity<CustomerResponseDto> getCustomerById(@PathVariable Long id){
         return new ResponseEntity<>(customerService.getCustomerById(id), HttpStatus.OK);
@@ -44,7 +44,7 @@ public class CustomerController {
 
 
 
-    @Operation(summary = "To get all courses")
+    @Operation(summary = "To get all customers")
     @GetMapping
     public ResponseEntity<List<CustomerResponseDto>> getAllCustomers(){
         return new ResponseEntity<>(customerService.getAllCustomers(), HttpStatus.OK);
@@ -53,7 +53,7 @@ public class CustomerController {
 
 
 
-    @Operation(summary = "To update customer using their id")
+    @Operation(summary = "To update customer based on their id")
     @PutMapping("/{id}")
     public ResponseEntity<CustomerResponseDto> updateCustomerById(@PathVariable Long id, @RequestBody CustomerRequestDto customerRequestDto){
         return new ResponseEntity<>(customerService.updateCustomerById(id, customerRequestDto), HttpStatus.OK);
@@ -62,7 +62,7 @@ public class CustomerController {
 
 
 
-    @Operation(summary = "To delete the customer based on id")
+    @Operation(summary = "To delete the customer using their id")
     @DeleteMapping("/{id}")
     public ResponseEntity<CustomerResponseDto> deleteCustomerById(@PathVariable Long id){
         return new ResponseEntity<>(customerService.deleteCustomerById(id), HttpStatus.OK);

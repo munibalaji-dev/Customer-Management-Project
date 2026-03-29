@@ -6,6 +6,7 @@ import com.munibalaji.CustomerManagementProject.exceptions.ResourceNotFoundExcep
 import com.munibalaji.CustomerManagementProject.mappers.CustomerMapper;
 import com.munibalaji.CustomerManagementProject.models.Customers;
 import com.munibalaji.CustomerManagementProject.repositories.CustomerRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,13 @@ public class CustomerServiceImplementation implements CustomerService{
         this.customerRepository = customerRepository;
     }
 
+
     @Override
+    @Transactional
     public CustomerResponseDto createCustomer(CustomerRequestDto customerRequestDto) {
+
+        // Here am checking the validation checks, it allows the data to save only if checks will pass
+        validationsCheckingForUniqueness(customerRequestDto);
 
         Customers saved = CustomerMapper.customerRequestDtoToEntity(customerRequestDto);
         Customers customers = customerRepository.save(saved);
@@ -70,5 +76,16 @@ public class CustomerServiceImplementation implements CustomerService{
         customerRepository.delete(customers);
 
         return null;
+    }
+
+
+    private void validationsCheckingForUniqueness(CustomerRequestDto customerRequestDto){
+        if (customerRepository.existsByEmail(customerRequestDto.getEmail())){
+            throw new ResourceNotFoundException("Email "+ customerRequestDto.getEmail()+ " is already exists");
+        }
+
+        if(customerRepository.existsByPhone(customerRequestDto.getPhone())){
+            throw new ResourceNotFoundException("Phone number "+ customerRequestDto.getPhone()+ " is already in use");
+        }
     }
 }

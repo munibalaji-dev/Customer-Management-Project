@@ -13,28 +13,54 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
+
+
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ExceptionDto> resourceNotFound(ResourceNotFoundException resourceNotFoundException) {
-        return new ResponseEntity<>(new ExceptionDto(HttpStatus.FOUND, resourceNotFoundException.getMessage()), HttpStatus.NOT_FOUND);
+
+        ExceptionDto exception = new ExceptionDto(
+                HttpStatus.NOT_FOUND,
+                resourceNotFoundException.getMessage()
+        );
+        return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+
     }
 
+
+
+
+    //  catch-all for unexpected server errors
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleGlobal(Exception exception){
-        return ResponseEntity.status(500).body("Something went wrong in application");
+    public ResponseEntity<String> handleGeneralException(Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("An unexpected error occurred: " + ex.getMessage());
     }
 
+
+
+    // This handler catches the @Valid failures like empty names, wrong email format
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException methodArgumentNotValidException) {
+
         Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error ->
+
+        methodArgumentNotValidException.getBindingResult().getFieldErrors().forEach(error ->
                 errors.put(error.getField(), error.getDefaultMessage())
         );
+
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<String> handleConflict(DataIntegrityViolationException ex) {
-        return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body("Error: Email or Phone number already exists!");
+
+
+    //  This handler catches the database conflicts like unique constraint violations
+    @ExceptionHandler(org.springframework.dao.DataIntegrityViolationException.class)
+    public ResponseEntity<ExceptionDto> handleConflict(DataIntegrityViolationException dataIntegrityViolationException) {
+        ExceptionDto exceptionDto = new ExceptionDto(
+                HttpStatus.CONFLICT,
+                dataIntegrityViolationException.getMessage()
+        );
+        return new ResponseEntity<>(exceptionDto, HttpStatus.CONFLICT);
     }
 }
