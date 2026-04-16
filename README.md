@@ -1,7 +1,9 @@
-Customer Management
+Customer Service
 ----------------------
 
-A Spring Boot-based Customer Management System that provides RESTful APIs to manage customer data with validation, pagination, sorting, and filtering support. This project follows a clean layered architecture and uses DTOs for structured data handling.
+Customer Service is a Spring Boot microservice responsible for managing customer data in the system. It provides REST APIs for CRUD operations along with support for pagination, sorting, and filtering.
+
+This service acts as a **data provider** and is consumed by other services such as Order Service.
 
 Tech Stack :
 -------------
@@ -38,7 +40,7 @@ customermanagement
 
 API Base URL :
 -------------
-http://localhost:3001/api/v2/customers
+http://localhost:3001/api/v1/customers
 
 API Endpoints :
 --------------
@@ -111,10 +113,9 @@ Phone → Unique & Not Null
 
 Future Enhancements :
 ------------------------
-Add JWT Authentication
-Add Logging
-Integrate with Order Service (Microservices)
-
+- Service discovery (Eureka)
+- API Gateway integration
+- Unit and integration testing
 Author
 --------
 MUNI BALAJI N
