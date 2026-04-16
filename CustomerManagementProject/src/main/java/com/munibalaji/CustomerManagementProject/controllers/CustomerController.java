@@ -16,7 +16,7 @@ import java.util.List;
 
 @Tag(name = "Customer Management ", description = "Operations related to customers")
 @RestController
-@RequestMapping("api/v2/customers")
+@RequestMapping("api/v1/customers")
 public class CustomerController {
 
     private CustomerService customerService;
