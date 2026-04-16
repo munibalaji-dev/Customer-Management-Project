@@ -52,8 +52,8 @@ INSERT INTO customers (customer_name, email, phone, address) VALUES ('Manoj Tiwa
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
-      <object connection-id="0b51ca21-46d0-4167-855b-37d379b1e694" object-ref="consoles/Customer Management" />
       <object connection-id="0b51ca21-46d0-4167-855b-37d379b1e694" object-ref="schemas/customermanagement/tables/customers" />
+      <object connection-id="0b51ca21-46d0-4167-855b-37d379b1e694" object-ref="consoles/Customer Management" />
     </open-files>
   </component>
   <component name="DBNavigator.Project.DatabasePrerequisiteManager">
